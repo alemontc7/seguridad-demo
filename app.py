@@ -25,7 +25,7 @@ usuarios = db["Usuarios"]
 productos=db["Productos"]
 pedidos=db["Pedidos"]
 carrito=db["Carrito"]
-app.secret_key = 'fsdhjfjdshfjksdhgsdh'
+app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 
 
 ##############

@@ -1,0 +1,16 @@
+language: python
+
+python:
+  - "3.9"
+
+before_install:
+  - pip install --upgrade pip 
+
+install:
+  - pip install -r requirements.txt 
+
+before_script:
+  - export FLASK_ENV=testing  
+
+script:
+  - python -m unittest discover 
