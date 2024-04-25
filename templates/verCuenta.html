@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>{{usuario.nombre}}</title>
+
+</head>
+<body>
+    <div class="container-xl px-4 mt-4">
+        <nav class="nav nav-borders">
+            {% if correoClienteRecibido != "admin" %}
+                <a target="__blank" class="nav-link" href="/index">Volver al menu cliente</a>
+            {% endif %}
+            {% if correoClienteRecibido == "admin" %}
+                <a target="__blank" class="nav-link" href="/indexAdmin">Volver al menu admin</a>
+            {% endif %}
+            <a class="nav-link active ms-0" href="/verCuenta/{{ usuario._id }}" target="__blank">Cuenta</a>
+            <a class="nav-link" href="/verFavoritos" target="__blank">Favoritos</a>
+            <a class="nav-link" href="/verPedidos" target="__blank">Pedidos</a>
+        </nav>
+        <hr class="mt-0 mb-4">
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header">Foto de perfil</div>
+                    <div class="card-body text-center">
+                        <img class="img-account-profile rounded-circle mb-2" src="https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914__340.png" alt="">
+                    </div>
+                    {% if exito %}
+                        <div class="container">
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Exito!</strong> {{message}}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="card mb-4">
+                    <div class="card-header">Detalles de la cuenta</div>
+                    <div class="card-body">
+                        <form action = "/actionUpdateCuenta" method = "POST">
+                            <div class="row gx-3 mb-3">
+
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputUsername">Nombre </label>
+                                    <input class="form-control" id="inputUsername" type="text" placeholder="Nombre usuario" name="nombre" value={{usuario.nombre}}>
+                                </div>
+                            </div>
+                            <div class="row gx-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputFirstName">Apellido</label>
+                                    <input class="form-control" id="inputFirstName" type="text" placeholder="Apellido" name="apellido" value="{{usuario.apellido}}">
+                                </div>
+                            </div>
+                            <div class="row gx-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputOrgName">Email</label>
+                                    <input class="form-control" id="inputOrgName" type="email" placeholder="Email" name="email" value="{{usuario.email}}" readonly>
+                                </div>
+                            </div>
+                            <div class="row gx-3 mb-3">
+
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputEmailAddress">Contraseña</label>
+                                    <input class="form-control" id="inputEmailAddress" placeholder="Contraseña" name="contrasenia" value="{{usuario.contrasenia}}">
+                                </div>
+                            </div>
+                            <div class="row gx-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputPhone">Celular</label>
+                                    <input class="form-control" id="inputPhone" type="tel" placeholder="Celular" name="celular" value="{{usuario.celular}}">
+                                </div>
+                            </div>
+                            <div class="row gx-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputPhone">Direccion</label>
+                                    <input class="form-control" id="inputPhone" type="tel" placeholder="Celular" name="direccion" value="{{usuario.direccion    }}">
+                                </div>
+                            </div>
+                            {%  if user %}
+                                <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                            {% endif %}
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

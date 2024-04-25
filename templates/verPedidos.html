@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/fonts/icomoon/style.css')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/owl.carousel.min.css')}}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/bootstrap.min.css')}}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
+
+    <title>Lista de productos favoritos</title>
+  </head>
+  <body>
+  
+
+  <div class="content">
+    
+    <div class="container">
+      <div style="padding-top: 3rem;">
+        {% if correoClienteRecibido != "admin" %}
+                <a href="/verMiCuenta">Volver a ver cuenta</a>
+        {% endif %}
+
+        {% if correoClienteRecibido == "admin" %}
+                <a href="/verCuenta">Volver a ver cuenta</a>
+        {% endif %}
+    </div>
+      <h2 class="mb-5">Pedidos</h2>
+
+        
+      <div class="table-responsive custom-table-responsive">
+
+        <table class="table custom-table">
+          <thead>
+            <tr>  
+              <th scope="col">Fecha y hora</th>
+              <th scope="col">Nota</th>
+              <th scope="col">Tipo de pago</th>
+              <th scope="col">Monto</th>
+              <th scope="col">Productos</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in pedidos %}
+                <tr scope="row">
+                  <td>
+                    {{item.fechaHora}}
+                  </td>
+                  <td>
+                    <a href="#">
+                        {{item.nota}}
+                    </a>
+                  </td>
+                  <td>
+                    {{item.tipoDePago}}
+                  </td>
+                  <td>{{item.montoTotal}}</td>
+                  <td><a href="/verPedido/{{ item._id }}">
+                    ver pedido
+                </a>
+                    <!--{{item.apellido}}-->
+                </td>
+
+                </tr>
+                <tr class="spacer"><td colspan="100"></td></tr>
+            {% endfor %}           
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+  </div>
+    
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

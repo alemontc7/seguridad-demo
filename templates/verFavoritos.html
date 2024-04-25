@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/fonts/icomoon/style.css')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/owl.carousel.min.css')}}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/bootstrap.min.css')}}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
+
+    <title>Lista de productos favoritos</title>
+  </head>
+  <body>
+  
+
+  <div class="content">
+    
+    <div class="container">
+      <div style="padding-top: 3rem;">
+        {% if correoClienteRecibido != "admin" %}
+                <a href="/verMiCuenta">Volver a ver cuenta</a>
+        {% endif %}
+
+        {% if correoClienteRecibido == "admin" %}
+                <a href="/verCuenta">Volver a ver cuenta</a>
+        {% endif %}
+    </div>
+      <h2 class="mb-5">Tus productos favoritos</h2>
+
+        
+      <div class="table-responsive custom-table-responsive">
+
+        <table class="table custom-table">
+          <thead>
+            <tr>  
+              <th scope="col">Nombre</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Descripcion</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in prods %}
+                <tr scope="row">
+                  <td>
+                    {{item.nombre}}
+                  </td>
+                  <td>
+                    <a href="#">
+                        {{item.categoria}}
+                    </a>
+                  </td>
+                  <td>
+                    {{item.precio}}
+                  </td>
+                  <td>{{item.descripcion}}</td>
+                </tr>
+                <tr class="spacer"><td colspan="100"></td></tr>
+            {% endfor %}           
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+  </div>
+    
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
